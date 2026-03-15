@@ -33,6 +33,7 @@ The refrence above was used for the installation for both the wazuh manager and 
 	- These commands enable and start the Wazuh-agent
 
 **Troubleshooting:**
+
 I ran into some difficulties due to a mistake i made when installing the manager. The agent was unable to be added to the server, due to wazuh manager being an older version of the agent. To fix this prblem, the solution was to remove the old version of wazuh manager and installing the correct and most recent version.
 
 1. sudo /var/ossec/in/wazuh-control info | grep -i version
