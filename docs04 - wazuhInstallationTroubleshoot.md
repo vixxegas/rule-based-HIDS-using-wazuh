@@ -1,7 +1,7 @@
 Wazuh. (n.d.). Deploying Wazuh agents on Linux systems - Wazuh agent. Documentation.wazuh.com. https://documentation.wazuh.com/current/installation-guide/wazuh-agent/wazuh-agent-package-linux.html
 The refrence above was used for the installation for both the wazuh manager and agent.
 
-Wazuh Server installation in the Manager VM:
+**Wazuh Server installation in the Manager VM:**
 1. sudo apt-get install gnupg apt-transport-https
 	- this command adds two packages for preparation to install Wazuh
 
@@ -20,7 +20,7 @@ Wazuh Server installation in the Manager VM:
 	- this command will install: the wazuh server, indexer and dashboard
 	- it will also give us the username and password to access the dashboard
 
-Wazuh agent installation in the Client VM:
+**Wazuh agent installation in the Client VM:**
 1. repaet steps 1-4 from the wazuh server
 	- Adds the wazuh repository and allows for secure installation
 
@@ -32,7 +32,7 @@ Wazuh agent installation in the Client VM:
 5. systemctl start wazuh-agent
 	- These commands enable and start the Wazuh-agent
 
-Troubleshooting:
+**Troubleshooting:**
 I ran into some difficulties due to a mistake i made when installing the manager. The agent was unable to be added to the server, due to wazuh manager being an older version of the agent. To fix this prblem, the solution was to remove the old version of wazuh manager and installing the correct and most recent version.
 
 1. sudo /var/ossec/in/wazuh-control info | grep -i version
@@ -43,3 +43,6 @@ I ran into some difficulties due to a mistake i made when installing the manager
 	- removes the old version of the wazuh server and installs the same version as the client
 
 4. repeat steps 3-5, this should add the agent to the server. Should be now monitored by the manager and now should appear on the dashboard as active
+
+5. sudo systemctl enable wazuh-manager wazuh-indexer wazuh-dashboard
+	- this will autorun the manager, indexer and dashboard when the VM is booted up
