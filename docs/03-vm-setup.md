@@ -25,7 +25,7 @@ AtckVM:
 ##Steps of installing and configuring
 
 ###1 Installation of VMs:
-Creating a new VM ➡️ machine + new
+Creating a new VM -> machine + new
 Enter VM name
 Select the iso image, can be found in ubuntu and kali website
 Assigning the correct components for each VM (RAM, CPU, Storage)
