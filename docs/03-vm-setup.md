@@ -1,4 +1,5 @@
 **Virtual machine Setup**
+
 This section documents the creation and configuration of the vm used for the rule-based HIDS.
 Three vm were created:
 - Wazuh Manager (Ubuntu OS)
