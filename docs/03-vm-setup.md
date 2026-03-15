@@ -11,11 +11,13 @@ WazuhManager:
 - CPU: 2 cores
 - Disk: 40GB
 - IP: 192.168.0.42
+
 WazuhClient:
 - RAM:4GB
 - CPU: 1 core
 - Disk: 30GB
 - IP:192.168.0.78
+
 AtckVM:
 - RAM: 4GB
 - CPU: 1 core
