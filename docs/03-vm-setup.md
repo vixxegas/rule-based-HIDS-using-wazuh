@@ -48,4 +48,4 @@ Kali VM:
 ifconfig - for all vm to discover the ip addresses
 
 Test connection:
-- ping <ip address>
+- ping ip-address to each VM
