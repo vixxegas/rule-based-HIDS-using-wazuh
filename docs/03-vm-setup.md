@@ -11,20 +11,20 @@ Three vm were created:
 WazuhManager:
 - RAM: 6GB
 - CPU: 2 cores
-- Disk: 40GB
-- IP: 192.168.0.42
+- Disk: 60GB
+- IP: 192.168.0.65
 
 WazuhClient:
 - RAM:4GB
 - CPU: 1 core
-- Disk: 30GB
-- IP:192.168.0.78
+- Disk: 40GB
+- IP:192.168.0.155
 
 AtckVM:
 - RAM: 4GB
 - CPU: 1 core
-- Disk: 30GB
-- IP: 192.168.0.247
+- Disk: 40GB
+- IP: 192.168.0.164
 
 **Steps of installing and configuring**
 
