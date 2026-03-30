@@ -7,6 +7,7 @@ Three vm were created:
 - Attack vm (Kali Linux) 
 
 **Virtual Machine Specifications**
+
 WazuhManager:
 - RAM: 6GB
 - CPU: 2 cores
