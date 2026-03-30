@@ -44,6 +44,7 @@ Ubuntu VM:
   - sudo apt install openssh-server -y
   - sudo systemctl enable ssh
   - sudo systemctl start ssh
+ 
 Kali VM:
 - sudo apt update && sudo apt upgrade -y
 
