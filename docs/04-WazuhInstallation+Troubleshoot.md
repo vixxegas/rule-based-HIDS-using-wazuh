@@ -26,6 +26,7 @@ The refrence above was used for the installation for both the wazuh manager and 
 
 2. sudo WAZUH_MANAGER="10.0.0.2" apt-get install wazuh-agent
 	- Deploys the wazuh agent
+	- replace the ip address of ip address of manager
 
 3. systemctl daemon-reload
 4. systemctl enable wazuh-agent
