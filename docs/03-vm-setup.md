@@ -18,22 +18,27 @@ WazuhClient:
 - RAM:4GB
 - CPU: 1 core
 - Disk: 40GB
-- IP:192.168.0.155
+- IP:192.168.56.102
 
 AtckVM:
 - RAM: 4GB
 - CPU: 1 core
 - Disk: 40GB
-- IP: 192.168.0.164
+- IP: 192.168.56.103
 
 **Steps of installing and configuring**
 
 1 Installation of VMs:
+
 Creating a new VM -> machine + new
+
 Enter VM name
+
 Select the iso image, can be found in ubuntu and kali website
+
 Assigning the correct components for each VM (RAM, CPU, Storage)
-Set Network to host-only for each VM, for isolation
+
+Set Network to host-only for each VM, for isolation. Add a second network adapater and set to NAT, this would allow for internet access
 Launch the VM and follow the default configurations
 
 2 after the installations
