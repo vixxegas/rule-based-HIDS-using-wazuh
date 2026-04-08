@@ -12,7 +12,7 @@ WazuhManager:
 - RAM: 6GB
 - CPU: 2 cores
 - Disk: 60GB
-- IP: 192.168.0.65
+- IP: 192.168.56.101
 
 WazuhClient:
 - RAM:4GB
@@ -33,7 +33,7 @@ Creating a new VM -> machine + new
 Enter VM name
 Select the iso image, can be found in ubuntu and kali website
 Assigning the correct components for each VM (RAM, CPU, Storage)
-Set Network to be briged for each VM
+Set Network to host-only for each VM, for isolation
 Launch the VM and follow the default configurations
 
 2 after the installations
