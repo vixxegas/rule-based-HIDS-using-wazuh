@@ -1,13 +1,13 @@
-**Brute-Force rule creation**
+## Brute-Force rule creation
 
-## Overview:
+**Overview:**
 This document describes the design and implementation of custom Wazuh rules for detecting brute-force attack behaviour on the agent VM. To achieve this goal, the steps were taken through these steps:
 1. reviewing Wazuh's built-in detection rules
 2. adding custom rules to meet the projects project detection design
 3. Testing
 4. Trouble shooting
 
-## 1.Built-in Rules reviewed:
+**1.Built-in Rules reviewed:**
 Identifying the pre-built wazuh rules that are used to detect brute-force related activity, I reviewed the following rule files:
 1. sshd_rules.xml
 2. pam_rules.xml
@@ -17,7 +17,7 @@ I discovered 2 pre-built rules that provides a baselines for authentication moni
 2. 5503
 3. 5501
 
-## 2.1 Custom SSH brute-force detection:
+**2.1 Custom SSH brute-force detection:**
 A custom rule to detect repeated failed SSH login attempts from the same source IP, the intended threshold was 5 failed attempts within a minute. This will allow for a small number of legitimate mistakes while still detecting suspicious repeated failures.
 ssh custom rule:
 <group name="bruteforce,">
@@ -27,7 +27,7 @@ ssh custom rule:
     <description>SSH bruteforce attempt, 5 login attempts from the same IP within a minute</description>
     </rule>
 
-## 2.2 local login detection
+**2.2 local login detection:**
 The detection design was one line for failed login and a successful line that were used to test the local login correlation logic.
 local login custom rule:
     <rule id="100003" level="7" timeframe="120">
@@ -46,15 +46,15 @@ local login custom rule:
 restarting the wazuh manager was necessary for changes to be applied:
 systemctl restart wazuh-manager
 
-## issues encountered:
+**issues encountered:**
 There were several errors that occured during the rule creation process:
 1. custom rule could not be loaded because of XML formatting errors:
     <group name = "bruteforce,"> --> <group name="bruteforce,">
 2. Rule ID conflict within one of the custom rules within local_rules.xml file
 3. rule 100004 did not fire, while 100003 does - trouble shooting still needs to occur
 
-## testing:
+**testing:**
 Testing was done through wazuh dashboard rule testing capabilities, by inputing a valid log that matches either ssh/local-login brute-force, then identifying if the rules were fired or not.
 
-## conclusion:
+**conclusion:**
 The brute-force rule design extended wazuh's pre-built rules for authentication, which allows for a more logical way of monitoring authenticaion, but still being practical and reducing noise within the dashboard.
