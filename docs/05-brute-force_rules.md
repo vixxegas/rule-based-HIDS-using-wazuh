@@ -25,6 +25,7 @@ A custom rule to detect repeated failed SSH login attempts from the same source 
 
 ssh custom rule:
 
+'''xml
 <group name="bruteforce,">
     <rule id="100002" level="10" frequency="5" timeframe=""60>
     <if_matched_sid>5710</if_matched_sid>
@@ -34,6 +35,7 @@ ssh custom rule:
     </same_source_srcip>
     </rule>   
 </group>
+'''
 
 **2.2 local login detection:**
 
@@ -41,6 +43,7 @@ The detection design was one line for failed login and a successful line that we
 
 local login custom rule:
 
+'''xml
 <group name="bruteforce,">
     <rule id="100003" level="7" timeframe="120">
         <if_matched_sid>5503</if_matched_sid>
@@ -54,6 +57,7 @@ local login custom rule:
         <description>successful login after 3 failed attempts</description>
     </rule>
 </group>
+'''
 
 restarting the wazuh manager was necessary for changes to be applied:
 systemctl restart wazuh-manager
