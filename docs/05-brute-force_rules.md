@@ -70,9 +70,9 @@ systemctl restart wazuh-manager
 There were several errors that occured during the rule creation process:
 
 1. custom rule could not be loaded because of XML formatting errors:
-
+```xml
     <group name = "bruteforce,"> --> <group name="bruteforce,">
-
+```
 3. Rule ID conflict within one of the custom rules within local_rules.xml file
 4. rule 100004 did not fire, while 100003 does - trouble shooting still needs to occur
 
