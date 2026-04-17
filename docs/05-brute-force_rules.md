@@ -60,7 +60,10 @@ local login custom rule:
 ```
 
 restarting the wazuh manager was necessary for changes to be applied:
+
+```bash
 systemctl restart wazuh-manager
+```
 
 **issues encountered:**
 
