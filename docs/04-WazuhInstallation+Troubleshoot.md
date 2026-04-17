@@ -2,6 +2,7 @@ Wazuh. (n.d.). Deploying Wazuh agents on Linux systems - Wazuh agent. Documentat
 The refrence above was used for the installation for both the wazuh manager and agent.
 
 **Wazuh Server installation in the Manager VM:**
+```bash
 1. sudo apt-get install gnupg apt-transport-https
 	- this command adds two packages for preparation to install Wazuh
 
@@ -19,7 +20,7 @@ The refrence above was used for the installation for both the wazuh manager and 
 6. sudo bash ./wazuh-install.sh -a
 	- this command will install: the wazuh server, indexer and dashboard
 	- it will also give us the username and password to access the dashboard
-
+```
 **Wazuh agent installation in the Client VM:**
 1. repaet steps 1-4 from the wazuh server
 	- Adds the wazuh repository and allows for secure installation
