@@ -31,6 +31,9 @@ ssh custom rule:
     <same_source_srcip/>
     <description>SSH bruteforce attempt, 5 login attempts from the same IP within a minute</description>
     </rule>
+    </same_source_srcip>
+    </rule>   
+</group>
 
 **2.2 local login detection:**
 
@@ -38,6 +41,7 @@ The detection design was one line for failed login and a successful line that we
 
 local login custom rule:
 
+<group name="bruteforce,">
     <rule id="100003" level="7" timeframe="120">
         <if_matched_sid>5503</if_matched_sid>
         <same_user/>
