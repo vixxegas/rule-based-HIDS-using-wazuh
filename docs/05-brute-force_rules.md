@@ -22,7 +22,9 @@ I discovered 2 pre-built rules that provides a baselines for authentication moni
 **2.1 Custom SSH brute-force detection:**
 
 A custom rule to detect repeated failed SSH login attempts from the same source IP, the intended threshold was 5 failed attempts within a minute. This will allow for a small number of legitimate mistakes while still detecting suspicious repeated failures.
+
 ssh custom rule:
+
 <group name="bruteforce,">
     <rule id="100002" level="10" frequency="5" timeframe=""60>
     <if_matched_sid>5710</if_matched_sid>
@@ -33,7 +35,9 @@ ssh custom rule:
 **2.2 local login detection:**
 
 The detection design was one line for failed login and a successful line that were used to test the local login correlation logic.
+
 local login custom rule:
+
     <rule id="100003" level="7" timeframe="120">
         <if_matched_sid>5503</if_matched_sid>
         <same_user/>
@@ -53,10 +57,13 @@ systemctl restart wazuh-manager
 **issues encountered:**
 
 There were several errors that occured during the rule creation process:
+
 1. custom rule could not be loaded because of XML formatting errors:
+
     <group name = "bruteforce,"> --> <group name="bruteforce,">
-2. Rule ID conflict within one of the custom rules within local_rules.xml file
-3. rule 100004 did not fire, while 100003 does - trouble shooting still needs to occur
+
+3. Rule ID conflict within one of the custom rules within local_rules.xml file
+4. rule 100004 did not fire, while 100003 does - trouble shooting still needs to occur
 
 **testing:**
 
