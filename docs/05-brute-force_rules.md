@@ -14,7 +14,9 @@ Identifying the pre-built wazuh rules that are used to detect brute-force relate
 1. sshd_rules.xml
 2. pam_rules.xml
 3. ossec_rules.xml
+
 I discovered 2 pre-built rules that provides a baselines for authentication monitoring, but still needed more specific logic to be viable as a detection design:
+
 1. 5710
 2. 5503
 3. 5501
