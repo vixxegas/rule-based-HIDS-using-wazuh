@@ -75,6 +75,7 @@ The rules discovered:
 4. 5403_
 
 **Log detection:**
+
 The custom rule design focused on audit and authentication logs. I configured auditd to monitor the relevant activity and added rules that would trigger when the 'priv_esc' audit key was detected, so any changes to the directories listed in the 'auditd.rules' files will trigger an alert.
 ```xml
 <group name="privilege_escalation,">
@@ -90,6 +91,7 @@ The custom rule design focused on audit and authentication logs. I configured au
     </rule>
 ```
 **Custom sudo detection:**
+
 I also added custom rules to monitor 'auth.log' for sudo related activity. The goal was to detect suspicious sudo usage and failed password attempts.
 ```xml
     <rule id="100013" level="12">
@@ -108,11 +110,13 @@ systemctl restart wazuh-manager
 To apply the changes
 
 **Testing:**
+
 Testing was carried out with wazuh dashboard log testing and 'wazuh-logtest'. I used valid log lines that matched the audit and sudo detection patterns to check whether the custom rules fired correctly.
 
 Another way of testing that was done, was seeing if the rules would fire if I performed privilege-escalation related scenrios in the agent VM.
 
 **Troubleshooting:**
+
 when a rule did not fire, I would check the parent rule relationship, log format and XML syntax. I also compared the event against the built-in wazuh rule chain to make sure custom rules was attached to the correct parent event.
 
 This trouble shooting was important due to some events matched different parent sudo rules, so detection design had to account for both cases.
@@ -120,4 +124,5 @@ This trouble shooting was important due to some events matched different parent 
 Further trouble shooting has to be done for audit and hoem directory rules as they did not fire.
 
 **conclusion**
+
 The privilege-escalation rule detection design extended wazuh's built-in authentication and audit monitoring, which created a more focused way to detect suspicious escalation activity while reducing noise in the dashboard. The final worked in testing and demonstrated that custom rules can improve the visibility into privilege-escalated bahviour.
