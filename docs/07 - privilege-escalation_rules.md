@@ -89,7 +89,7 @@ The custom rule design focused on audit and authentication logs. I configured au
         <description>changes to home directory</description>
     </rule>
 ```
-**Sustom sudo detection:**
+**Custom sudo detection:**
 I also added custom rules to monitor 'auth.log' for sudo related activity. The goal was to detect suspicious sudo usage and failed password attempts.
 ```xml
     <rule id="100013" level="12">
