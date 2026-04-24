@@ -34,8 +34,6 @@ ssh custom rule:
     <same_source_srcip/>
     <description>SSH bruteforce attempt, 5 login attempts from the same IP within a minute</description>
     </rule>
-    </same_source_srcip>
-    </rule>   
 ```
 
 **2.2 local login detection:**
