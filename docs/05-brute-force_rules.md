@@ -17,7 +17,7 @@ Identifying the pre-built wazuh rules that are used to detect brute-force relate
 
 I discovered 2 pre-built rules that provides a baselines for authentication monitoring, but still needed more specific logic to be viable as a detection design:
 
-1. 5710
+1. 5760
 2. 5503
 3. 5501
 
@@ -30,7 +30,7 @@ ssh custom rule:
 ```xml
 <group name="bruteforce,">
     <rule id="100002" level="10" frequency="5" timeframe=""60>
-    <if_matched_sid>5710</if_matched_sid>
+    <if_matched_sid>5760</if_matched_sid>
     <same_source_srcip/>
     <description>SSH bruteforce attempt, 5 login attempts from the same IP within a minute</description>
     </rule>
@@ -74,7 +74,6 @@ There were several errors that occured during the rule creation process:
     <group name = "bruteforce,"> --> <group name="bruteforce,">
 ```
 3. Rule ID conflict within one of the custom rules within local_rules.xml file
-4. rule 100004 did not fire, while 100003 does - trouble shooting still needs to occur
 
 **testing:**
 
