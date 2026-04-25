@@ -13,17 +13,17 @@ This document describes the design and implementation of custom Wazuh rules for 
 Identifying the pre-built wazuh rules that are used to detect brute-force related activity, I reviewed the following rule files:
 1. sshd_rules.xml
 2. pam_rules.xml
-3. ossec_rules.xml
 
 I discovered 2 pre-built rules that provides a baselines for authentication monitoring, but still needed more specific logic to be viable as a detection design:
 
 1. 5760
-2. 5503
-3. 5501
+2. 5715
+3. 5503
+4. 5501
 
 **2.1 Custom SSH brute-force detection:**
 
-A custom rule to detect repeated failed SSH login attempts from the same source IP, the intended threshold was 5 failed attempts within a minute. This will allow for a small number of legitimate mistakes while still detecting suspicious repeated failures.
+A custom rule to detect repeated failed SSH login attempts from the same source IP, the intended threshold was 5 failed attempts within a minute. This will allow for a small number of legitimate mistakes while still detecting suspicious repeated failures. Another line is included to alert for a successful connection after failed multiple attempts, incase there is a successful brute-force attack.
 
 ssh custom rule:
 
@@ -31,8 +31,14 @@ ssh custom rule:
 <group name="bruteforce,">
     <rule id="100002" level="10" frequency="5" timeframe=""60>
     <if_matched_sid>5760</if_matched_sid>
-    <same_source_srcip/>
-    <description>SSH bruteforce attempt, 5 login attempts from the same IP within a minute</description>
+    <same_srcip/>
+    <description>multiple ssh connection attempts to $(dstuser) from IP $(srcip)</description>
+    </rule>
+
+    <rule id="100112" level="12">
+    <if_matched_sid>5715</if_matched_sid>
+    <same_srcip/>
+    <description>successful connection to use $(dstuser) after multiple attempts, from IP $(srcip)</description>
     </rule>
 ```
 
@@ -46,13 +52,14 @@ local login custom rule:
     <rule id="100003" level="7" timeframe="120">
         <if_matched_sid>5503</if_matched_sid>
         <same_user/>
-        <description>3 failed login attempts by the same user</description>
+        <description>multiple failed login attempts to $(dstuser)</description>
     </rule>
+
     <rule id="100004" level="10">
         <if_matched_sid>100003</if_matched_sid>
         <if_sid>5501</if_sid>
         <same_user/>
-        <description>successful login after 3 failed attempts</description>
+        <description>successful login to $(dstuser) after failed attempts</description>
     </rule>
 </group>
 ```
