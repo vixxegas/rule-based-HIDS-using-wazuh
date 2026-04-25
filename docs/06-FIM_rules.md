@@ -17,7 +17,7 @@ These paths chosen becuase of the sensitive authentication and configuration dat
 
 **Logs**
 
-Within the agent VMs ossec.conf file, I added these lines to allow for the pre-built FIM to scan for the files listed above (this is written under the File Integrity MOnitoring section in the ossec.conf ):
+Within the agent VMs ossec.conf file, I added these lines to allow for the pre-built FIM to scan for the files listed above (this is written under the File Integrity Monitoring section in the ossec.conf ):
 ```xml
     <directories realtime="yes" report_changes="yes">/etc</directories>
     <directories realtime="yes" report_changes="yes">/etc/ssh</directories>
