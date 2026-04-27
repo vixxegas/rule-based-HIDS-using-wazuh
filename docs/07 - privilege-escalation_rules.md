@@ -72,7 +72,8 @@ The rules discovered:
 1. 80700
 2. 5404
 3. 5402
-4. 5403_
+4. 5403
+5. 5405
 
 **Log detection:**
 
@@ -99,11 +100,19 @@ I also added custom rules to monitor 'auth.log' for sudo related activity. The g
         <match>incorrect password|authentication failure</match>
         <description>failed sudo authentication attempt</description>
     </rule>
+
     <rule id="100015" level="12">
         <if_sid>5402, 5403</if_sid><regex>passwd|chmod|chown|curl|wget|useradd|usermod|groupmod|visudo|sudoedit</regex>
         <description>suspciosus command via sudo</description>
+
+    <rule id="100016" level="12">
+        <if_sid>5405</if_sid>
+        <match>testuser</match>
+        <description>attempted sudo by unauthorised testuser</description>
+    </rule>
 </group>
 ```
+
 ```bash
 systemctl restart wazuh-manager
 ```
