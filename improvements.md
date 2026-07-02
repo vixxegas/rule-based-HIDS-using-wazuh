@@ -2,11 +2,13 @@ These are the improvements that was notated in my report to try improve the HIDS
 
 **Active-Response**
 
+'''xmk
  <command>
   <name>firewall-drop</name>
   <executable>firewall-drop</executable>
   <timeout_allowed>yes</timeout_allowed>
 </command>
+'''xml
 ...
 <active-response>
   <command>firewall-drop</command>
