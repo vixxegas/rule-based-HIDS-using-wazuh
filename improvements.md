@@ -5,6 +5,7 @@ These are the improvements that was noted in my report to try improve the HIDS. 
 *Wazuh manager:*
 
 The ossec.conf file was checked and modified to ensure that active response is active and specifies what rules need to be triggered to timeout an IP address.
+
 ```xml
  <command>
   <name>firewall-drop</name>
@@ -18,7 +19,7 @@ The ossec.conf file was checked and modified to ensure that active response is a
   <rules_id>100002,100003</rules_id>
   <timeout>300</timeout>
 </active-response>
-```xml
+```
 
 *Wazuh agent and other VM:*
 
