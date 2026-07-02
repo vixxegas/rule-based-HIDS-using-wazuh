@@ -2,7 +2,7 @@ These are the improvements that was notated in my report to try improve the HIDS
 
 ***Active-Response***
 
-*Wazuh manager*
+**Wazuh manager**
 
 The ossec.conf file was checked and modified to ensure that active response is active and specifies what rules need to be triggered to timeout an IP address:
 ```xml
