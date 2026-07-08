@@ -29,6 +29,8 @@ Another VM was used to perform a shh brute-force attempt (hydra) five times agai
 
 Within the Wazuh-agent VM there is a testuser, the current system has rules to detect against against privilege escalation and critical files being changed. To improve the security system is to disable the user when these rules are triggered and only be activated again by a root user (wazuhagent), to mitigate the damage that can be caused.
 
+*Wazuh Manager*
+
 ```xml
 <command>
   <name>disable-account</name>
@@ -43,12 +45,38 @@ Within the Wazuh-agent VM there is a testuser, the current system has rules to d
     <rules_id>100016</rules_id>
     <timeout>300</timeout>
 </active-response>
+```
 
-*Wazuh agent and other VM:*
+*Wazuh Agent:*
 
 Troubleshooting: when testing this new response - the disable account is being executed as it appears on the dashboard and rule 100016 ia successfully being triggered. However when checking the status of testuser it is not 'L' (Locked). I discovered that when rule 100016 is triggered the dstuser isset to root, so the the disable-account will attempt to lock out root (unsuccessful), instead of testuser. To begin fixing this problem, reconfiguring rule 100016 was the first step.
+
 Result: It did not work, i was unable to find a way to route dstuser to testuser so the disable account command can execute corretcly.
 
-The new plan is write a custom script which will disable testuser manually
+The new plan is write a custom script which will disable testuser manually - documented as the second attempt
 
 ***Active-Response - Disable user accounts - second attempt***
+
+*Wazuh Agent:*
+
+```bash
+sudo nano /var/ossec/active-response/bin/disable-testuser.sh
+```
+in that new file add:
+```bash
+#!/bin/bash
+
+USER_TO_DISABLE="testuser"
+
+if id "$USER_TO_DISABLE" >/dev/null 2>&1; then
+  /usr/bin/passwd -l "$USER_TO_DISABLE"
+  /usr/bin/logger "Wazuh active response: locked user $USER_TO_DISABLE"
+fi
+
+exit 0
+```
+After give Wazuh the permission to run the script:
+```bash
+sudo chmod 750 /var/ossec/active-response/bin/disable-testuser.sh
+sudo chown root:wazuh /var/ossec/active-response/bin/disable-testuser.sh
+```
