@@ -103,6 +103,6 @@ Modify the ossec.conf file to include:
 </active-response>
 ```
 
-*result:*
+*Result:*
 
 When rule 100016 was triggered, the custom active response script executed successfully on the agent and locked testuser. The account status changed from P to L, confirming that the user password was locked as intended.
