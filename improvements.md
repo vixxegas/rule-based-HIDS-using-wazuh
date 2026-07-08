@@ -49,13 +49,17 @@ Within the Wazuh-agent VM there is a testuser, the current system has rules to d
 
 *Wazuh Agent:*
 
-Troubleshooting: when testing this new response - the disable account is being executed as it appears on the dashboard and rule 100016 ia successfully being triggered. However when checking the status of testuser it is not 'L' (Locked). I discovered that when rule 100016 is triggered the dstuser isset to root, so the the disable-account will attempt to lock out root (unsuccessful), instead of testuser. To begin fixing this problem, reconfiguring rule 100016 was the first step.
+Troubleshooting: 
 
-Result: It did not work, i was unable to find a way to route dstuser to testuser so the disable account command can execute corretcly.
+The response triggered successfully in the Wazuh dashboard, and rule 100016 was observed as expected. However, checking the account status on the agent showed that testuser remained unlocked. Investigation showed that the decoded alert field dstuser was resolving to root, so the built-in disable-account action was attempting to lock the root account instead of testuser.
 
-The new plan is write a custom script which will disable testuser manually - documented as the second attempt
+Result: 
+
+The first attempt did not work as intended because the response target was derived from the alert context rather than being explicitly set to testuser. A reliable way to redirect dstuser to testuser could not be found, so the built-in active response path was abandoned.
 
 ***Active-Response - Disable user accounts - second attempt***
+
+A custom active response script was introduced to bypass the dstuser problem and lock testuser directly. The script was placed on the agent VM and configured to run when rule 100016 fired. This approach made the containment action explicit and ensured that the intended account was disabled regardless of how the alert decoded the sudo event.
 
 *Wazuh Agent:*
 
@@ -80,3 +84,24 @@ After give Wazuh the permission to run the script:
 sudo chmod 750 /var/ossec/active-response/bin/disable-testuser.sh
 sudo chown root:wazuh /var/ossec/active-response/bin/disable-testuser.sh
 ```
+
+*Wazuh Manager:*
+
+Modify the ossec.conf file to include:
+```xml
+<command>
+  <name>disable-testuser</name>
+  <executable>disable-testuser.sh</executable>
+  <timeout_allowed>no</timeout_allowed>
+</command>
+...
+<active-response>
+  <disabled>no</disabled>
+  <command>disable-testuser</command>
+  <location>local</location>
+  <rules_id>100016</rules_id>
+</active-response>
+```
+
+*result:*
+When rule 100016 was triggered, the custom active response script executed successfully on the agent and locked testuser. The account status changed from P to L, confirming that the user password was locked as intended.
