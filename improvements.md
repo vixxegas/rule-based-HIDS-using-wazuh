@@ -28,3 +28,21 @@ Another VM was used to perform a shh brute-force attempt (hydra) five times agai
 ***Active-Response - Disable user accounts***
 
 Within the Wazuh-agent VM there is a testuser, the current system has rules to detect against against privilege escalation and critical files being changed. To improve the security system is to disable the user when these rules are triggered and only be activated again by a root user (wazuhagent), to mitigate the damage that can be caused.
+
+```xml
+<command>
+  <name>disable-account</name>
+  <executable>disable-account</executable>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+...
+<active-response>
+    <disabled>no</disabled>
+    <command>disable-account</command>
+    <location>local</location>
+    <rules_id>100016</rules_id>
+    <timeout>300</timeout>
+</active-response>
+
+*Wazuh agent and other VM:*
+
